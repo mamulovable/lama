@@ -69,7 +69,7 @@ export default async function SharePage({
           rel="noopener noreferrer"
         >
           <span className="text-center">
-            Powered by <span className="font-semibold">Together.ai</span> and{" "}
+            Powered by <span className="font-semibold">OpenRouter</span> and{" "}
             <span className="font-semibold">llamacoder</span>
           </span>
         </a>

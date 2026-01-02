@@ -22,22 +22,18 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    let options: ConstructorParameters<typeof Together>[0] = {};
-    if (process.env.HELICONE_API_KEY) {
-      options.baseURL = "https://together.helicone.ai/v1";
-      options.defaultHeaders = {
-        "Helicone-Auth": `Bearer ${process.env.HELICONE_API_KEY}`,
-        "Helicone-Property-appname": "LlamaCoder",
-        "Helicone-Session-Id": chat.id,
-        "Helicone-Session-Name": "LlamaCoder Chat",
-      };
-    }
-
-    const together = new Together(options);
+    const together = new Together({
+      apiKey: process.env.OPENROUTER_API_KEY,
+      baseURL: "https://openrouter.ai/api/v1",
+      defaultHeaders: {
+        "HTTP-Referer": "https://llamacoder.io",
+        "X-Title": "LlamaCoder",
+      },
+    });
 
     async function fetchTitle() {
       const responseForChatTitle = await together.chat.completions.create({
-        model: "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo",
+        model: "meta-llama/llama-3.1-8b-instruct",
         messages: [
           {
             role: "system",
@@ -56,7 +52,7 @@ export async function POST(request: NextRequest) {
 
     async function fetchTopExample() {
       const findSimilarExamples = await together.chat.completions.create({
-        model: "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo",
+        model: "meta-llama/llama-3.1-8b-instruct",
         messages: [
           {
             role: "system",
@@ -88,7 +84,7 @@ export async function POST(request: NextRequest) {
     let fullScreenshotDescription;
     if (screenshotUrl) {
       const screenshotResponse = await together.chat.completions.create({
-        model: "Qwen/Qwen3-VL-32B-Instruct",
+        model: "qwen/qwen-2-vl-72b-instruct",
         temperature: 0.4,
         max_tokens: 1000,
         messages: [
@@ -114,7 +110,7 @@ export async function POST(request: NextRequest) {
     let userMessage: string;
     if (quality === "high") {
       let initialRes = await together.chat.completions.create({
-        model: "Qwen/Qwen3-Next-80B-A3B-Instruct",
+        model: "qwen/qwen-2.5-72b-instruct",
         // model: "moonshotai/Kimi-K2-Thinking",
         messages: [
           {

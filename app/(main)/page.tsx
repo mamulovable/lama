@@ -107,7 +107,7 @@ export default function Home() {
             target="_blank"
           >
             <span className="text-center">
-              Powered by <span className="font-semibold">Together AI</span>.
+              Powered by <span className="font-semibold">OpenRouter</span>.
               Used by
               <span className="font-semibold"> 1.1M+ users. </span>
             </span>
@@ -449,17 +449,17 @@ const Footer = memo(() => {
         <div className="font-medium">
           Built with{" "}
           <a
-            href="https://togetherai.link/?utm_source=llamacoder&utm_medium=referral&utm_campaign=example-app"
+            href="https://openrouter.ai/"
             className="font-semibold text-blue-600 underline-offset-4 transition hover:text-gray-700 hover:underline"
           >
             Llama
           </a>{" "}
           and{" "}
           <a
-            href="https://togetherai.link/?utm_source=llamacoder&utm_medium=referral&utm_campaign=example-app"
+            href="https://openrouter.ai/"
             className="font-semibold text-blue-600 underline-offset-4 transition hover:text-gray-700 hover:underline"
           >
-            Together AI
+            OpenRouter
           </a>
           .
         </div>
