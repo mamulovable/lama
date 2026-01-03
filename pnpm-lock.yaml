@@ -17,6 +17,9 @@ importers:
       '@conform-to/zod':
         specifier: ^1.2.2
         version: 1.8.2(zod@3.25.76)
+      '@google/generative-ai':
+        specifier: ^0.24.1
+        version: 0.24.1
       '@headlessui/react':
         specifier: ^2.2.0
         version: 2.2.7(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
@@ -679,6 +682,10 @@ packages:
 
   '@floating-ui/utils@0.2.10':
     resolution: {integrity: sha512-aGTxbpbg8/b5JfU1HXSrbH3wXZuLPJcNEcZQFMxLs3oSzgtVu6nFPkbbGGUvBcUjKV2YyB9Wxxabo+HEH9tcRQ==}
+
+  '@google/generative-ai@0.24.1':
+    resolution: {integrity: sha512-MqO+MLfM6kjxcKoy0p1wRzG3b4ZZXtPI+z2IE26UogS2Cm/XHO+7gGRBh6gcJsOiIVoH93UwKvW4HdgiOZCy9Q==}
+    engines: {node: '>=18.0.0'}
 
   '@headlessui/react@2.2.7':
     resolution: {integrity: sha512-WKdTymY8Y49H8/gUc/lIyYK1M+/6dq0Iywh4zTZVAaiTDprRfioxSgD0wnXTQTBpjpGJuTL1NO/mqEvc//5SSg==}
@@ -5114,6 +5121,8 @@ snapshots:
       tabbable: 6.2.0
 
   '@floating-ui/utils@0.2.10': {}
+
+  '@google/generative-ai@0.24.1': {}
 
   '@headlessui/react@2.2.7(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:

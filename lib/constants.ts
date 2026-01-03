@@ -1,7 +1,11 @@
 export const MODELS = [
   {
-    label: "Llama 3.3 70B",
-    value: "meta-llama/llama-3.3-70b-instruct",
+    label: "MiniMax-M2.1",
+    value: "minimax/minimax-m2.1",
+  },
+  {
+    label: "Gemini 1.5 Pro",
+    value: "gemini-1.5-pro",
   },
   {
     label: "Grok 4.1 Fast",

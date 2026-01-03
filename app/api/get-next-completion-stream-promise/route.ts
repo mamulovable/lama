@@ -63,6 +63,51 @@ export async function POST(req: Request) {
     messages = [messages[0], messages[1], messages[2], ...messages.slice(-7)];
   }
 
+  if (model.includes("gemini")) {
+    const { GoogleGenerativeAI } = await import("@google/generative-ai");
+    const genAI = new GoogleGenerativeAI(
+      process.env.GOOGLE_GENERATIVE_AI_API_KEY!,
+    );
+    const geminiModel = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
+
+    const result = await geminiModel.generateContentStream({
+      contents: messages
+        .filter((m) => m.role !== "system")
+        .map((m) => ({
+          role: m.role === "assistant" ? "model" : "user",
+          parts: [{ text: m.content }],
+        })),
+      systemInstruction: messages.find((m) => m.role === "system")?.content,
+    });
+
+    const encoder = new TextEncoder();
+    const stream = new ReadableStream({
+      async start(controller) {
+        try {
+          for await (const chunk of result.stream) {
+            const text = chunk.text();
+            if (text) {
+              const payload = {
+                choices: [{ delta: { content: text } }],
+              };
+              controller.enqueue(
+                encoder.encode(`data: ${JSON.stringify(payload)}\n\n`),
+              );
+            }
+          }
+          controller.enqueue(encoder.encode("data: [DONE]\n\n"));
+          controller.close();
+        } catch (error) {
+          controller.error(error);
+        }
+      },
+    });
+
+    return new Response(stream, {
+      headers: { "Content-Type": "text/event-stream" },
+    });
+  }
+
   const together = new Together({
     apiKey: process.env.OPENROUTER_API_KEY,
     baseURL: "https://openrouter.ai/api/v1",
