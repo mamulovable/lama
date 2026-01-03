@@ -2,7 +2,6 @@ import { PrismaClient } from "@prisma/client";
 import { PrismaNeon } from "@prisma/adapter-neon";
 import { Pool } from "@neondatabase/serverless";
 import { z } from "zod";
-import Together from "together-ai";
 
 function optimizeMessagesForTokens(
   messages: { role: "system" | "user" | "assistant"; content: string }[],
@@ -108,6 +107,7 @@ export async function POST(req: Request) {
     });
   }
 
+  const { default: Together } = await import("together-ai");
   const together = new Together({
     apiKey: process.env.OPENROUTER_API_KEY,
     baseURL: "https://openrouter.ai/api/v1",

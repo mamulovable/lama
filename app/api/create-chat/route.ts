@@ -5,7 +5,6 @@ import {
   screenshotToCodePrompt,
   softwareArchitectPrompt,
 } from "@/lib/prompts";
-import Together from "together-ai";
 
 export async function POST(request: NextRequest) {
   try {
@@ -22,6 +21,7 @@ export async function POST(request: NextRequest) {
       },
     });
 
+    const { default: Together } = await import("together-ai");
     const together = new Together({
       apiKey: process.env.OPENROUTER_API_KEY,
       baseURL: "https://openrouter.ai/api/v1",
