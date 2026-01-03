@@ -70,3 +70,5 @@ const getGeneratedAppByID = cache(async (id: string) => {
     },
   });
 });
+
+export const runtime = "edge";

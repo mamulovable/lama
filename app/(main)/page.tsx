@@ -523,5 +523,5 @@ function LoadingMessage({
   );
 }
 
-export const runtime = "nodejs";
+export const runtime = "edge";
 export const maxDuration = 60;

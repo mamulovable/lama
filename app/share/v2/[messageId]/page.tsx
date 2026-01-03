@@ -89,3 +89,5 @@ const getMessage = cache(async (messageId: string) => {
     },
   });
 });
+
+export const runtime = "edge";
